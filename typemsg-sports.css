@@ -1,0 +1,81 @@
+body {
+  margin-right: 5%;
+  margin-bottom: 30%;
+  margin-top: 50px;
+}
+
+
+.header {
+  display: flex;
+  align-items: flex-start;
+}
+
+.menu-section {
+  display: flex;
+  align-items: flex-start;
+}
+
+.menu-button {
+  background-color: rgb(255,255,255);
+  border: none;
+  margin-right: 200px;
+  margin-left: 50px;
+}
+
+.menu-button:hover {
+  cursor: pointer;
+}
+
+.menu-icon {
+  height: 50px;
+}
+
+.enter-message-section {
+  display: flex;
+  justify-content: center;
+}
+
+.message-input, .send-button {
+  font-family: 'Times New Roman', Times, serif;
+  border: none;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+}
+
+.message-input {
+  padding-left: 30px;
+  height: 200px;
+  width: 600px;
+  font-size: 30px;
+  color: rgb(138, 132, 133);
+  border-radius: 30px;
+}
+
+.message-input::placeholder {
+  height: 100px;
+  font-size: 30px;
+}
+
+.send-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.send-button {
+  height: 60px;
+  width: 160px;
+  margin-left: 50px;
+  font-size: 30px;
+  color: white;
+  background-color: rgb(233, 188, 183);
+  border-radius: 30px;
+
+  margin-left: 100px;
+
+  transition: background-color, 0.5s;
+}
+
+.send-button:hover {
+  cursor: pointer;
+  background-color: rgba(233, 188, 183, 0.50);
+}

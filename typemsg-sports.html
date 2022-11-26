@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sports Messages</title>
+        <link rel="stylesheet" href="typemsg-sports.css">
+        
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="menu-section">
+                <button class="menu-button" onclick="window.location.href='categories.html'">
+                    <img class="menu-icon" src="menu-icon.svg">
+                </button>
+            </div>
+    
+            <div class="enter-message-section">
+                <div>
+                    <input class="message-input" placeholder="Enter your message here" type="text" id="response">
+                </div>
+        
+                <div class="send-section">
+                    <button class="send-button" onclick="save()">Send</button>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script> 
+    <script src="index.js"></script>
+
+</html>
