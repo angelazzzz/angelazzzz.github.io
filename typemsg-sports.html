@@ -20,18 +20,24 @@
         </button>
       </div>
     
-        <div class="enter-message-section">
-          <div class="message-section">
-            <input class="message-input" placeholder="Enter your message here" type="text" id="response">
-          </div>
-        
-          <div class="send-section">
-            <button class="send-button" onclick="saveAndUpdate('sports')">Send</button>
-          </div>
+      <div class="enter-message-section">
+        <div class="message-section">
+          <input class="message-input" placeholder="Enter your message here" type="text" id="response">
         </div>
+        
+        <div class="send-section">
+          <button class="send-button" onclick="save('sports')">Send</button>
+        </div>
+      </div>
+
+      <div class="refresh-section">
+          <button class="refresh-button" onclick="render('sports')">
+            <img class="menu-icon" src="refresh-icon.png">
+          </button>
+      </div>
     </div>
 
-    <div id="user-responses">
+    <div class="user-responses-section" id="user-responses">
 
     </div>
 

@@ -14,10 +14,11 @@ const firebaseConfig = {
 
   var database=firebase.database()
 
-  function saveAndUpdate(thisIsACategory){
+  /*function saveAndUpdate(thisIsACategory){
     save(thisIsACategory);
     newMessage(currentResponse);
   }
+  */
 
   let currentResponse;
   let messageCountSports = 0;
@@ -26,20 +27,33 @@ const firebaseConfig = {
     var response = document.getElementById('response').value
     currentResponse = response;
 
-    let theMessageCount;
-    if(thisIsACategory=='sports'){
-      messageCountSports++;
-      theMessageCount = messageCountSports;
-    }
+    let messageID = ' ' + new Date().getTime();
 
-    database.ref('palisade/' + 'responses/' + thisIsACategory+'/' + 'message'+ theMessageCount).set({
-      message: response
+    database.ref('palisade/' + thisIsACategory+'/' + messageID).set({
+      messageID: messageID,
+      message: response,
+      user: 1
     })
+    render(thisIsACategory);
   }
 
-  let userResponses = getElementById('user-responses');
-  function newMessage(theCurrentResponse){
-    var para = document.createElement("p");
-    para.innerText = theCurrentResponse;
-    document.userResponses.appendChild(para);
+  //viewing/rendering the user-responses
+  function render(thisIsACategory) {
+    const userResponses = document.getElementById('user-responses');
+    userResponses.innerHTML = '';
+
+    const responseReference = database.ref('palisade/' + thisIsACategory)
+    responseReference.on('value', function(snapshot){
+      snapshot.forEach(function(childSnapshot) {
+        let childSnapVal = childSnapshot.val();
+        let childMessageID = childSnapshot.key;
+
+        let childMessage = childSnapVal.message;
+        let element = document.createElement('p');
+        element.innerText = childMessage;
+        element.id = childMessageID;
+        element.className = "response";
+        userResponses.appendChild(element);
+      });
+    });
   }
