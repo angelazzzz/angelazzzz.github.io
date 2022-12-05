@@ -50,21 +50,22 @@ const firebaseConfig = {
 
     let replyID = new Date().getTime();
 
-    let user;
+    let userID;
+    let usersID = localStorage.getItem('user');
 
-    /*let responseReference = database.ref('palisade/' + thisIsACategory + '/' + messageID)
+    let responseReference = database.ref('palisade/' + thisIsACategory + '/' + messageID)
     responseReference.on('value', function(snapshot){
-      let childSnapVal = childSnapshot.val();
-      user = childSnapVal.user;
-    });*/
-
-    //if(localStorage.getItem('user')!==user){
+      let snapVal = snapshot.val();
+      userID = snapVal.user;
+    });
+    /*if(usersID!==userID){*/
       database.ref('palisade/' + thisIsACategory+'/' + messageID + '/replies/' + replyID).set({
-        message: reply,
-        //user: user
-      })
-    //}
-    //console.log('hi');
+        reply: reply,
+        user: userID
+      });
+    /*} else {
+      alert("You can't reply to your own message!");
+    }*/
   }
 
   //viewing/rendering the user-responses
@@ -115,3 +116,63 @@ const firebaseConfig = {
       });
     });
   }
+
+  /*
+  OUTLINE OF PLAN:
+  - every time someone replies to a user's message,
+   the user gets a popup containing the reply,
+    asking the user if they want to accept or decline
+  - accept: head to chat.html
+    -> this is opened in a new tab
+
+  OUTLINE OF CHAT PLAN:
+  so! currently on chat.html
+  - store startTime and currentTime
+    -> perhaps on local storage>
+    -> millis() perhaps
+  - constantly compare startTime and currentTime
+  - once the difference between them reaches 2 minutes,
+    another popup appears for both users to continue/stop talking
+  - continue: no time limit, talk as much as they like,
+    until they press a button that takes them back to categories.html
+  - stop talking: takes them back to categories.html
+  
+  */
+
+  
+  function checkIfChanged(thisIsACategory) {
+    const userResponses = document.getElementById('user-responses');
+    userResponses.innerHTML = '';
+
+    const repliesRef = database.ref('palisade/' + thisIsACategory)
+    repliesRef.on('value', function(snapshot){
+      snapshot.forEach(function(childSnapshot) {
+        let childSnapVal = childSnapshot.val();
+        let childMessageID = childSnapshot.key;
+        let childUser = childSnapVal.user;
+        if(childUser===localStorage.getItem('user')){
+          if(childSnapVal.replies!==undefined){
+            //let childReplies = childSnapVal.replies;
+            //childReplies.forEach(function(childReplyInfo) {
+              //let childReply = childReplyInfo.reply;
+              userConfirm(childSnapVal.message, 'insert msg here later');
+            //});
+          }
+        }
+      });
+    });
+
+  }
+
+  //NOTE: make it so that every time the data changes
+  //https://www.w3schools.com/js/js_popup.asp
+  function userConfirm(message, reply) {
+    if (confirm("Someone replied to " + message + "with \"" + reply + "\". Would you like to chat with them?")) {
+      //NEED TO DO: OPEN A CHAT WITH THE TWO USERS INVOLVED
+      //how to get the user who got replied to's user ID: localStorage.getItem('user');
+      //how to get the user who replied's user ID: to be determined
+      window.open("chat.html");
+    }
+  }
+
+  //var runCheckIfChanged = setInterval(checkIfChanged, 10000);
