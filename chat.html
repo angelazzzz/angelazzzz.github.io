@@ -8,12 +8,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="timer.css">
   <title>Chat</title>
 
 </head>
 
 <body>
-  <p>this is talking yay</p>
+  <p>The chat would be here.</p>
+     <!-- AMAZING TIMER CREATED BY EKAM SO SLAY LOVE THAT-->
+     <div id="safeTimer">
+      <h2 class="timer">Safe Timer</h2>
+      <p id="safeTimerDisplay" class="timer__part"></p>
+      </div>
+      
+      <script>
+      var myVar = setInterval(function(){ myTimer() }, 1000);
+      var secondlimit = 30;
+      
+      function myTimer() {
+      if(secondlimit == 0)
+      {
+          myStopFunction();
+      }
+      
+      document.getElementById("safeTimerDisplay").innerHTML = '00:' + zeroPad(secondlimit,2);
+      secondlimit = secondlimit  - 1;
+      
+      }
+      
+      function myStopFunction() {
+          clearInterval(myVar);
+      }
+      
+      function zeroPad(num, places) {
+        var zero = places - num.toString().length + 1;
+        return Array(+(zero > 0 && zero)).join("0") + num;
+      }
+      
+      </script>
 </body>
 
 <script src="index.js"></script>

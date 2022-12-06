@@ -2,7 +2,8 @@ body {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 30%;
-  background-color: rgb(233, 188, 183);
+  /*background-color: rgb(233, 188, 183);*/
+  background-color: rgb(126, 37, 83);
 }
 
 .instructions {

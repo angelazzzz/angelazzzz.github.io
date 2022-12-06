@@ -74,7 +74,8 @@ body {
   margin-left: 50px;
   font-size: 30px;
   color: white;
-  background-color: rgb(233, 188, 183);
+  /*background-color: rgb(233, 188, 183);*/
+  background-color: rgb(193, 130, 163);
   border-radius: 30px;
 
   margin-left: 100px;
@@ -84,7 +85,8 @@ body {
 
 .send-button:hover {
   cursor: pointer;
-  background-color: rgba(233, 188, 183, 0.50);
+  /*background-color: rgba(233, 188, 183, 0.50);*/
+  background-color: rgb(217, 154, 186);
 }
 
 .refresh-section {
@@ -150,7 +152,8 @@ body {
 
 .response-reply-button {
   height: 100%;
-  background-color: rgb(233, 188, 183);
+  /*background-color: rgb(233, 188, 183);*/
+  background-color: rgb(193, 130, 163);
   border: none;
   margin-right: 50px;
   margin-left: 50px;
@@ -162,7 +165,8 @@ body {
 
 .response-reply-button:hover {
   cursor: pointer;
-  background-color: rgba(233, 188, 183,0.75);
+  /*background-color: rgba(233, 188, 183,0.75);*/
+  background-color: rgb(217, 154, 186);
 }
 
 .response-reply-input {

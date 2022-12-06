@@ -27,9 +27,6 @@ const firebaseConfig = {
     );
   }
   
-
-  let currentResponse;
-  let messageCountSports = 0;
   function save(thisIsACategory){
 
     var response = document.getElementById('usermessage').value;
@@ -58,14 +55,14 @@ const firebaseConfig = {
       let snapVal = snapshot.val();
       userID = snapVal.user;
     });
-    /*if(usersID!==userID){*/
+    if(usersID!==userID){
       database.ref('palisade/' + thisIsACategory+'/' + messageID + '/replies/' + replyID).set({
         reply: reply,
         user: userID
       });
-    /*} else {
+    } else {
       alert("You can't reply to your own message!");
-    }*/
+    }
   }
 
   //viewing/rendering the user-responses
@@ -93,7 +90,7 @@ const firebaseConfig = {
 
         let responseReplyButton = document.createElement('button');
         responseReplyButton.addEventListener("click", function saveIt(){
-          saveReply('sports', childMessageID);
+          saveReply(thisIsACategory, childMessageID);
         });
         responseReplyButton.className = "response-reply-button";
 
@@ -152,11 +149,16 @@ const firebaseConfig = {
         let childUser = childSnapVal.user;
         if(childUser===localStorage.getItem('user')){
           if(childSnapVal.replies!==undefined){
-            //let childReplies = childSnapVal.replies;
-            //childReplies.forEach(function(childReplyInfo) {
-              //let childReply = childReplyInfo.reply;
-              userConfirm(childSnapVal.message, 'insert msg here later');
-            //});
+            let childReplies = childSnapVal.replies;
+              for(eachReply in childReplies){
+                const thing = childReplies[eachReply];
+                let thingReply = thing.reply;
+                userConfirm(childSnapVal.message, thingReply);
+                //userConfirm(childSnapVal.message, childSnapshot.child('replies').child(eachReply).val().reply);
+                //let removeThis = childSnapshot.child('replies').child(eachReply);
+                let removeThisRef = database.ref('palisade/' + thisIsACategory+'/' + childMessageID + '/replies/' + eachReply);
+                removeThisRef.remove();
+              }
           }
         }
       });
@@ -167,12 +169,14 @@ const firebaseConfig = {
   //NOTE: make it so that every time the data changes
   //https://www.w3schools.com/js/js_popup.asp
   function userConfirm(message, reply) {
-    if (confirm("Someone replied to " + message + "with \"" + reply + "\". Would you like to chat with them?")) {
+    if (confirm("Someone replied to \"" + message + "\" with \"" + reply + "\". Would you like to chat with them?")) {
       //NEED TO DO: OPEN A CHAT WITH THE TWO USERS INVOLVED
       //how to get the user who got replied to's user ID: localStorage.getItem('user');
       //how to get the user who replied's user ID: to be determined
       window.open("chat.html");
+    } else {
+      window.location.href='categories.html';
     }
   }
 
-  //var runCheckIfChanged = setInterval(checkIfChanged, 10000);
+  //setInterval(checkIfChanged, 10000);
