@@ -14,6 +14,7 @@ const firebaseConfig = {
 
   var database=firebase.database()
 
+<<<<<<< Updated upstream
   function setUserID(){
     if(localStorage.getItem('user')===null)
       {let userID=uuidv4();
