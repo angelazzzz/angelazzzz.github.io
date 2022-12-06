@@ -28,10 +28,18 @@ const firebaseConfig = {
   }
   
 
+=======
+  function saveAndUpdate(thisIsACategory){
+    save(thisIsACategory);
+    newMessage(currentResponse);
+  }
+
+>>>>>>> Stashed changes
   let currentResponse;
   let messageCountSports = 0;
   function save(thisIsACategory){
 
+<<<<<<< Updated upstream
     var response = document.getElementById('usermessage').value;
 
     let messageID = new Date().getTime();
@@ -176,3 +184,25 @@ const firebaseConfig = {
   }
 
   //var runCheckIfChanged = setInterval(checkIfChanged, 10000);
+=======
+    var response = document.getElementById('response').value
+    currentResponse = response;
+
+    let theMessageCount;
+    if(thisIsACategory=='sports'){
+      messageCountSports++;
+      theMessageCount = messageCountSports;
+    }
+
+    database.ref('palisade/' + 'responses/' + thisIsACategory+'/' + 'message'+ theMessageCount).set({
+      message: response
+    })
+  }
+
+  let userResponses = getElementById('user-responses');
+  function newMessage(theCurrentResponse){
+    var para = document.createElement("p");
+    para.innerText = theCurrentResponse;
+    document.userResponses.appendChild(para);
+  }
+>>>>>>> Stashed changes
